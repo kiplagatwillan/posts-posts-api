@@ -102,20 +102,31 @@ app.get("/posts/:id", async(req,res)=>{
     }
 });
 
-app.post("/posts", async(req, res)=> {
-    try{
-        const {title , content} = req.body;
-        if (!title || !content ){
-            return res.status(400).json({message:"Title and content required"});
-        }
-        const newPost = await client.post.create({
-            data:{title, content},
-        });
-    res.status(201).json(newPost) }
-catch(e){
-    handleServerError(e, res)
-}
-})
+app.post("/posts", async (req, res) => {
+  try {
+    const { title, content, userId } = req.body;
+
+    if (!title || !content || !userId) {
+      return res.status(400).json({ message: "Title, content, and userId are required" });
+    }
+    const user =await client.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const newPost = await client.post.create({
+      data:{
+        title,
+        content,
+        user: { connect: { id: userId } }, 
+      },
+});
+
+    res.status(201).json(newPost);
+  } catch (e) {
+    handleServerError(e, res);
+  }
+});
+
 //  update post
 app.patch("/posts/:id", async(req,res)=>{
     try {
