@@ -1,8 +1,8 @@
 # Users & Posts RESTful API
 
-This is a full-stack ready backend REST API built using **Node.js**, **Express.js**, **Prisma ORM**, and **PostgreSQL**. It manages users and their blog posts, enforcing a one-to-many relationship (i.e., one user can author multiple posts).
+This is a  backend REST API built using **Node.js**, **Express.js**, **Prisma ORM**, and **PostgreSQL**. It manages users and their blog posts, enforcing a one-to-many relationship (i.e., one user can author multiple posts).
 
-The API allows client applications to create, retrieve, update, and delete both users and posts. It follows clean architecture practices and is ready for integration with frontend frameworks or mobile apps.
+The API allows client applications to create, retrieve, update, and delete  aposts. It follows clean architecture practices and is ready for integration with frontend frameworks or mobile apps.
 
 ---
 
@@ -12,7 +12,7 @@ The API allows client applications to create, retrieve, update, and delete both 
 - **Express.js** — Web framework for Node.js
 - **Prisma** — Next-generation ORM for database interactions
 - **PostgreSQL** — Open-source relational database
-- **UUID** — For unique identifier generation (via Prisma)
+  
 
 ---
 
@@ -22,10 +22,10 @@ The API allows client applications to create, retrieve, update, and delete both 
 
 | Field        | Type   | Description                          |
 |--------------|--------|--------------------------------------|
-| `id`         | String | Primary key, UUID                    |
+| `id`         | Int | Primary key                          |
 | `firstName`  | String | First name of the user               |
 | `lastName`   | String | Last name of the user                |
-| `emailAddress` | String | Unique email address              |
+| `emailAddress` | String | Unique email address               |
 | `userName`   | String | Unique username                      |
 | `posts`      | Post[] | All posts authored by the user       |
 
@@ -35,13 +35,13 @@ The API allows client applications to create, retrieve, update, and delete both 
 
 | Field         | Type      | Description                           |
 |---------------|-----------|---------------------------------------|
-| `id`          | String    | Primary key, UUID                     |
+| `id`          | Int    | Primary key                           |
 | `title`       | String    | Title of the post                     |
 | `content`     | String    | Post body/content                     |
 | `createdAt`   | DateTime  | Defaults to now()                     |
 | `lastUpdated` | DateTime  | Updated automatically on modification |
 | `isDeleted`   | Boolean   | Soft delete flag (defaults to false)  |
-| `userId`      | String    | Foreign key linking to User ID        |
+| `userId`      | Int       | Foreign key linking to User ID        |
 
 ---
 
